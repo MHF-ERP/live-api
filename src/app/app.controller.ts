@@ -1,0 +1,10 @@
+import { Controller, Get } from '@nestjs/common';
+@Controller()
+export class AppController {
+  constructor() {}
+
+  @Get('/debug-sentry')
+  getError() {
+    throw new Error('My first Sentry error!');
+  }
+}

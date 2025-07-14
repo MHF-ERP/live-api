@@ -1,0 +1,27 @@
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String
+  phone    String
+  password String
+  verified Boolean @default(false)
+  active   Boolean @default(true)
+  image    String  @default("uploads/default.png")
+
+  // default columns
+  createdAt DateTime  @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  // direct relations
+  Role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId Int  @map("role_id")
+
+  // relations
+  OTPs     OTP[]
+  Sessions Session[]
+  Notifications     Notification[]
+
+  @@unique([email, roleId])
+  @@index([email, roleId])
+  @@map("users")
+}

@@ -1,0 +1,18 @@
+model Notification {
+    id Int @id @default(autoincrement())
+
+    // Normal Fields
+    image String?
+    title String
+    body  String
+    read  Boolean  @default(false)
+    // Default Fields
+    createdAt DateTime  @default(now()) @map("created_at")
+    deletedAt DateTime? @map("deleted_at")
+    
+    // Direct Relations
+    User   User @relation(fields: [userId], references: [id])
+    userId Int  @map("user_id")
+
+    @@map("notifications")
+}
