@@ -26,7 +26,6 @@ model Permission {
 
   RolePermission RolePermission[]
 
-  @@unique([name, method])
   @@unique([prefix, method])
   @@map("permissions")
 }
