@@ -123,5 +123,17 @@
   "Teacher not the owner of this lesson": "Teacher not the owner of this lesson",
   "Teacher has already attended this lesson": "Teacher has already attended this lesson",
   "students returned successfully": "students returned successfully",
-  "students report fetched successfully": "students report fetched successfully"
+  "students report fetched successfully": "students report fetched successfully",
+  "Permission updated successfully": "Permission updated successfully",
+  "Role updated successfully": "Role updated successfully",
+  "Role deleted successfully": "Role deleted successfully",
+  "Create role successfully": "Create role successfully",
+  "password updated successfully": "password updated successfully",
+  "User updated successfully": "User updated successfully",
+  "INVALID_CREDENTIALS": "INVALID_CREDENTIALS",
+  "notification fetched successfully": "notification fetched successfully",
+  "search processed successfully": "search processed successfully",
+  "return allowed models successfully": "return allowed models successfully",
+  "My first Sentry error!": "My first Sentry error!",
+  "Failed to send push notification": "Failed to send push notification"
 }

@@ -15,9 +15,7 @@ export class NotificationService {
       }),
       this.prisma.notification.count({ where: args.where }),
     ]);
-    await this.prisma.notification.create({
-      data: { userId: 100, title: ',', body: 'm' },
-    });
+  
     return { data, total };
   }
 }
