@@ -135,6 +135,7 @@ export const selectUserWithRoleAndPermissionsOBJ = () => {
 export const selectFlattenedUserOBJ = () => {
   const selectArgs: FlattenedUser = {
     ...(selectUserWithRoleOBJ() as any),
+    unReadNotifications: 'number',
     Permissions: [
       {
         name: 'string',

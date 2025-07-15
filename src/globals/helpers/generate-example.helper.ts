@@ -12,9 +12,8 @@ export function generateExample(include: Record<string, any>): any {
     if (typeof obj === 'object' && obj !== null) {
       const result: Record<string, any> = {};
       for (const subKey in obj) {
-        // ⛔ تجاهل select/include
         if (subKey === 'select' || subKey === 'include') {
-          Object.assign(result, generate(obj[subKey], subKey)); // 👈 افرد القيم اللي جواهم بدل ما تحفظهم كـ select
+          Object.assign(result, generate(obj[subKey], subKey));
         } else {
           result[subKey] = generate(obj[subKey], subKey);
         }
@@ -22,29 +21,43 @@ export function generateExample(include: Record<string, any>): any {
       return result;
     }
 
-    return getExampleValue(key);
-  };
-
-  const getExampleValue = (key?: string): any => {
-    if (!key) return 'string';
-    const lowerKey = key.toLowerCase();
-    if (lowerKey.includes('id')) return 1;
-    if (lowerKey.includes('date')) return new Date().toISOString();
-    if (lowerKey.includes('email')) return 'user@example.com';
-    if (lowerKey.includes('verified')) return true;
-    if (lowerKey === 'lat') return '-53.349';
-    if (lowerKey === 'lng') return '6.2603';
-    if (lowerKey.includes('active')) return true;
-    if (lowerKey.includes('image')) return 'https://example.com/avatar.png';
-    if (lowerKey.includes('name')) return 'John Doe';
-    if (lowerKey.includes('phone')) return '+123456789';
-    if (lowerKey.includes('at')) return '2025-06-26T18:17:10.000Z';
-    if (lowerKey.includes('address')) return '123 Main St';
-    return 'string';
+    return getExampleValue(key, obj);
   };
 
   return generate(include);
 }
+
+const getExampleValue = (key?: string, obj?: any): any => {
+  if (key && obj) {
+    if (obj === 'number') return 1;
+  }
+  if (!key) return 'string';
+  const lowerKey = key.toLowerCase();
+
+  if (
+    lowerKey.includes('id') ||
+    lowerKey.includes('number') ||
+    lowerKey.includes('amount') ||
+    lowerKey.includes('count') ||
+    lowerKey.includes('total') ||
+    lowerKey.includes('price')
+  )
+    return 1;
+
+  if (lowerKey.includes('date')) return new Date().toISOString();
+  if (lowerKey.includes('email')) return 'user@example.com';
+  if (lowerKey.includes('verified')) return true;
+  if (lowerKey === 'lat') return -53.349;
+  if (lowerKey === 'lng') return 6.2603;
+  if (lowerKey.includes('active')) return true;
+  if (lowerKey.includes('image')) return 'https://example.com/avatar.png';
+  if (lowerKey.includes('name')) return 'John Doe';
+  if (lowerKey.includes('phone')) return '+123456789';
+  if (lowerKey.includes('at')) return '2025-06-26T18:17:10.000Z';
+  if (lowerKey.includes('address')) return '123 Main St';
+
+  return 'string';
+};
 
 interface ExampleConfig {
   title: string;
@@ -65,34 +78,21 @@ export function buildExamples(
     let dataExample: any;
 
     if (Array.isArray(body)) {
-      // لو array، طبق generateExample على كل عنصر فيها
       dataExample = body.map((item) =>
         typeof item === 'object' ? generateExample(item) : item,
       );
     } else if (typeof body === 'object' && body !== null) {
-      // لو object، طبق generateExample
       dataExample = generateExample(body);
     } else {
-      // primitive or unexpected
       dataExample = body;
     }
 
-    if (paginated) {
-      formattedExamples[key] = {
-        summary: title,
-        value: {
-          data: dataExample,
-          total: 1,
-        },
-      };
-    } else {
-      formattedExamples[key] = {
-        summary: title,
-        value: {
-          data: dataExample,
-        },
-      };
-    }
+    formattedExamples[key] = {
+      summary: title,
+      value: paginated
+        ? { data: dataExample, total: 1 }
+        : { data: dataExample },
+    };
   }
 
   return {
@@ -104,6 +104,7 @@ export function buildExamples(
     },
   };
 }
+
 export function ApiDefaultOkResponse(body: any = {}) {
   return applyDecorators(
     ApiOkResponse({
@@ -113,6 +114,39 @@ export function ApiDefaultOkResponse(body: any = {}) {
             default: {
               value: {
                 data: body,
+              },
+            },
+          },
+        },
+      },
+    }),
+  );
+}
+
+// ✅ Example generator from DTO class
+export function generateExampleFromType<T>(cls: new () => T): T {
+  const instance = new cls();
+  const result: Record<string, any> = {};
+
+  for (const key of Object.keys(instance)) {
+    result[key] = getExampleValue(key, (instance as any)[key]);
+  }
+
+  return result as T;
+}
+
+// ✅ Swagger decorator from DTO class
+export function ApiDefaultOkResponseWithType(cls: new () => any) {
+  const example = generateExampleFromType(cls);
+
+  return applyDecorators(
+    ApiOkResponse({
+      content: {
+        'application/json': {
+          examples: {
+            default: {
+              value: {
+                data: example,
               },
             },
           },

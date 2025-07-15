@@ -6,4 +6,13 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  async getAllRoles() {
+    return this.prisma.role.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }

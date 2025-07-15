@@ -135,5 +135,6 @@
   "search processed successfully": "search processed successfully",
   "return allowed models successfully": "return allowed models successfully",
   "My first Sentry error!": "My first Sentry error!",
-  "Failed to send push notification": "Failed to send push notification"
+  "Failed to send push notification": "Failed to send push notification",
+  "Roles returned successfully": "Roles returned successfully"
 }

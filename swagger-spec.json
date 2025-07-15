@@ -34,6 +34,41 @@
         }
       }
     },
+    "/api/roles-show": {
+      "get": {
+        "operationId": "AppController_rolesShow",
+        "summary": "",
+        "deprecated": true,
+        "parameters": [
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/swagger-diff": {
       "get": {
         "operationId": "SwaggerDiffController_getSwaggerDiff",
@@ -1165,6 +1200,7 @@
                           "key": "string",
                           "name": "John Doe"
                         },
+                        "unReadNotifications": 1,
                         "Permissions": [
                           {
                             "name": "John Doe",
