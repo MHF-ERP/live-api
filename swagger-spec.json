@@ -972,6 +972,7 @@
                       "data": [
                         {
                           "name": "John Doe",
+                          "prefix": "string",
                           "method": [
                             "string"
                           ]
@@ -1091,6 +1092,7 @@
                       "data": [
                         {
                           "name": "John Doe",
+                          "prefix": "string",
                           "method": [
                             "string"
                           ]
@@ -2121,12 +2123,12 @@
   "tags": [],
   "servers": [
     {
-      "url": "http://127.0.0.1:3030",
-      "description": "Local"
-    },
-    {
       "url": "http://127.0.0.1:3000",
       "description": "Sandbox"
+    },
+    {
+      "url": "http://127.0.0.1:3030",
+      "description": "Local"
     },
     {
       "url": "http://127.0.0.1:3000",
