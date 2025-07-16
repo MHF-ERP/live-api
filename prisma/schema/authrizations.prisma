@@ -9,8 +9,9 @@ model Role {
   deletedAt DateTime? @map("deleted_at")
 
   // relations
-  Users          User[]
-  RolePermission RolePermission[]
+  Users              User[]
+  RolePermission     RolePermission[]
+  SystemNotification SystemNotification[]
 
   @@map("roles")
 }

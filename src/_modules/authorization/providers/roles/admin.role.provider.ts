@@ -7,6 +7,7 @@ const adminPermissions: PermissionMap = {
   roles: ['post', 'get', 'delete', 'patch'],
   profile: ['get', 'patch'],
   permissions: ['get', 'patch'],
+  customers: ['post', 'get', 'delete', 'patch'],
 } as const satisfies PermissionMap;
 
 export const AdminRole = {

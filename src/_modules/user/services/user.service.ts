@@ -159,10 +159,9 @@ export class UserService {
   }
 
   async update(id: Id, data: UpdateUserDTO) {
-    const { fcm, ...rest } = data;
     await this.prisma.user.update({
       where: { id },
-      data: rest,
+      data,
     });
   }
 }

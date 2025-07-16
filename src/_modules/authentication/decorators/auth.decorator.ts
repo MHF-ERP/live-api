@@ -10,11 +10,21 @@ import { RequiredPermissions } from './permission.decorator';
 interface AuthOptions {
   type?: SessionType;
   prefix?: string;
+  visitor?: boolean;
 }
 
-export function Auth({ type = SessionType.ACCESS, prefix }: AuthOptions = {}) {
+export function Auth({
+  type = SessionType.ACCESS,
+  prefix,
+  visitor = false,
+}: AuthOptions = {}) {
   const guards: any[] = [AuthGuard(type)];
-
+  if (visitor) {
+    return applyDecorators(
+      ApiBearerAuth(`Access Token`),
+      UseGuards(OptionalAuthGuard),
+    );
+  }
   if (prefix) guards.push(PermissionAndTypeGuard);
 
   const decorators = [

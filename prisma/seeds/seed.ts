@@ -8,6 +8,7 @@ import {
   seedRolePermissions,
   seedRoles,
 } from './permissionAndRoles.seed';
+import { seedCustomer } from './customer.seed';
 
 const prisma = new PrismaClient();
 
@@ -20,6 +21,7 @@ async function main() {
   await seedAdmin(prisma);
   // await seedLanguage(prisma);
   if (process.env.SEED === 'test') {
+    await seedCustomer(prisma);
   }
   await prisma.$disconnect();
 }

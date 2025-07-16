@@ -29,6 +29,12 @@ export const permissions = [
     default: false,
     methods: ['get', 'patch'],
   },
+  {
+    name: { en: 'Customers', ar: 'العملاء' },
+    prefix: 'customers',
+    default: false,
+    methods: ['post', 'get', 'patch', 'delete'],
+  },
 ];
 
 type Permission = (typeof permissions)[number];

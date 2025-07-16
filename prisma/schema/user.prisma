@@ -17,11 +17,37 @@ model User {
   roleId Int  @map("role_id")
 
   // relations
-  OTPs     OTP[]
-  Sessions Session[]
-  Notifications     Notification[]
+  OTPs          OTP[]
+  Sessions      Session[]
+  Notifications Notification[]
+  AllowedNotification AllowedNotification[]
+  Details       Details?
+  Address       Address?
 
   @@unique([email, roleId])
+  @@unique([phone, roleId])
+  @@index([phone, roleId])
   @@index([email, roleId])
   @@map("users")
+}
+
+model Details {
+  userId Int  @id @unique @map("user_id")
+  User   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  wallet Float?   @default(0.0)
+  male   Boolean?
+
+  @@map("details")
+}
+
+model Address {
+  userId Int  @id @unique @map("user_id")
+  User   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  address String @map("address")
+  lat     Float  @map("lat")
+  lng     Float  @map("lng")
+
+  @@map("addresses")
 }

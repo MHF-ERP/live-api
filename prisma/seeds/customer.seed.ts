@@ -3,13 +3,23 @@ import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 export async function seedCustomer(prisma: PrismaClient) {
-  for (let i = 21; i <= 40; i += 1) {
+  const role = await prisma.role.findUnique({
+    where: { key: 'customer' },
+  });
+  const count = await prisma.user.count({
+    where: {
+      roleId: role.id, // Assuming roleId 2 is for customers
+    },
+  });
+  if (count > 0) {
+    return;
+  }
+  for (let i = 1; i <= 1; i += 1) {
     const data = {
-      id: i,
-      name: `user${i}`,
-      email: `user${i}@user.com`,
+      name: `customer${i}`,
+      email: `customer${i}@user.com`,
       phone: `+966 0509999${i}`,
-      roleId: 2,
+      roleId: role.id,
       verified: true,
       password: bcrypt.hashSync(process.env.PASSWORD, +process.env.HASH_SALT),
     };
@@ -17,7 +27,15 @@ export async function seedCustomer(prisma: PrismaClient) {
       where: {
         id: i,
       },
-      create: data,
+      create: {
+        ...data,
+        Details: {
+          create: {
+            wallet: 0.0,
+            male: true,
+          },
+        },
+      },
       update: data,
     });
   }

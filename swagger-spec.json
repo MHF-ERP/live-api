@@ -1725,6 +1725,371 @@
         ]
       }
     },
+    "/api/customers": {
+      "post": {
+        "operationId": "CustomerCreateController_createUser",
+        "parameters": [
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "Access Token": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "CustomerController_getAll",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "get-all-customer": {
+                    "summary": "Get All Customer",
+                    "value": {
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "John Doe",
+                          "email": "user@example.com",
+                          "phone": "+123456789",
+                          "verified": true,
+                          "active": true,
+                          "image": "https://example.com/avatar.png",
+                          "createdAt": "2025-06-26T18:17:10.000Z",
+                          "deletedAt": "2025-06-26T18:17:10.000Z"
+                        }
+                      ],
+                      "total": 1
+                    }
+                  },
+                  "get-customer-with-id": {
+                    "summary": "Get Customer with id",
+                    "value": {
+                      "data": {
+                        "id": 1,
+                        "name": "John Doe",
+                        "email": "user@example.com",
+                        "phone": "+123456789",
+                        "verified": true,
+                        "active": true,
+                        "image": "https://example.com/avatar.png",
+                        "createdAt": "2025-06-26T18:17:10.000Z",
+                        "deletedAt": "2025-06-26T18:17:10.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "ACCESS Token": []
+          }
+        ]
+      }
+    },
+    "/api/customers/{id}": {
+      "get": {
+        "operationId": "CustomerController_getAll",
+        "parameters": [
+          {
+            "name": "id",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "get-all-customer": {
+                    "summary": "Get All Customer",
+                    "value": {
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "John Doe",
+                          "email": "user@example.com",
+                          "phone": "+123456789",
+                          "verified": true,
+                          "active": true,
+                          "image": "https://example.com/avatar.png",
+                          "createdAt": "2025-06-26T18:17:10.000Z",
+                          "deletedAt": "2025-06-26T18:17:10.000Z"
+                        }
+                      ],
+                      "total": 1
+                    }
+                  },
+                  "get-customer-with-id": {
+                    "summary": "Get Customer with id",
+                    "value": {
+                      "data": {
+                        "id": 1,
+                        "name": "John Doe",
+                        "email": "user@example.com",
+                        "phone": "+123456789",
+                        "verified": true,
+                        "active": true,
+                        "image": "https://example.com/avatar.png",
+                        "createdAt": "2025-06-26T18:17:10.000Z",
+                        "deletedAt": "2025-06-26T18:17:10.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "ACCESS Token": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "CustomerController_updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "ACCESS Token": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "CustomerController_deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "ACCESS Token": []
+          }
+        ]
+      }
+    },
     "/api/languages": {
       "post": {
         "operationId": "LanguagesController_create",
@@ -2362,10 +2727,67 @@
           },
           "phone": {
             "type": "string",
-            "example": "+20 1092725145"
+            "example": "+966 0509999999"
           },
           "fcm": {
             "type": "string"
+          }
+        }
+      },
+      "CreateCustomerDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+966 0509999999"
+          },
+          "password": {
+            "type": "string",
+            "example": "Default@123",
+            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
+          },
+          "male": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "phone",
+          "password",
+          "male"
+        ]
+      },
+      "UpdateCustomerDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@test.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+966 0509999999"
+          },
+          "password": {
+            "type": "string",
+            "example": "Default@123",
+            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
+          },
+          "male": {
+            "type": "boolean",
+            "example": false
           }
         }
       },

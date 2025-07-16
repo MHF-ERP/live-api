@@ -2,17 +2,56 @@ model Notification {
     id Int @id @default(autoincrement())
 
     // Normal Fields
-    image String?
-    title String
-    body  String
-    read  Boolean  @default(false)
+    image     String?
+    title     Json      @db.Json
+    body      Json      @db.Json
+    read      Boolean   @default(false)
     // Default Fields
     createdAt DateTime  @default(now()) @map("created_at")
     deletedAt DateTime? @map("deleted_at")
-    
+
     // Direct Relations
     User   User @relation(fields: [userId], references: [id])
     userId Int  @map("user_id")
 
     @@map("notifications")
+}
+
+model SystemNotification {
+    id Int @id @default(autoincrement())
+
+    // Normal Fields
+    title      Json      @db.Json
+    body       Json      @db.Json
+    method     Method
+    event      String
+    receiverId String    @map("receiver_id")
+    group      Boolean   @default(false)
+    // Default Fields
+    createdAt  DateTime  @default(now()) @map("created_at")
+    deletedAt  DateTime? @map("deleted_at")
+
+    // Direct Relations
+    Receiver            Role                  @relation(fields: [receiverId], references: [key])
+    AllowedNotification AllowedNotification[]
+
+    @@map("system_notifications")
+}
+
+model AllowedNotification {
+    // Direct Relations
+    User   User @relation(fields: [userId], references: [id])
+    userId Int  @map("user_id")
+
+    SystemNotification   SystemNotification @relation(fields: [systemNotificationId], references: [id])
+    systemNotificationId Int                @map("system_notification_id")
+
+    @@id([userId, systemNotificationId])
+    @@map("allowed_notifications")
+}
+
+enum Method {
+    EMAIL
+    SMS
+    NOTIFICATION
 }
