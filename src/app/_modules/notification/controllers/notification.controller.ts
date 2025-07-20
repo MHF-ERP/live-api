@@ -1,8 +1,7 @@
-import { Controller, Get, Res, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 import { ApiQuery, ApiTags, PartialType } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Auth } from 'src/_modules/authentication/decorators/auth.decorator';
-import { NotificationInterceptor } from 'src/app/interceptor/notification.interceptor';
 import { Filter } from 'src/decorators/param/filter.decorator';
 import { tag } from 'src/globals/helpers/tag.helper';
 import { ResponseService } from 'src/globals/services/response.service';
@@ -21,7 +20,6 @@ export class NotificationController {
 
   @Get('/notifications')
   @Auth()
-  @UseInterceptors(NotificationInterceptor)
   @ApiQuery({ type: PartialType(FilterNotificationDTO) })
   async findAll(
     @Res() res: Response,

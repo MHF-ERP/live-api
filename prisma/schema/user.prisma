@@ -20,7 +20,6 @@ model User {
   OTPs          OTP[]
   Sessions      Session[]
   Notifications Notification[]
-  AllowedNotification AllowedNotification[]
   Details       Details?
   Address       Address?
 

@@ -143,5 +143,6 @@
   "Customer updated successfully": "Customer updated successfully",
   "Customer deleted successfully": "Customer deleted successfully",
   "customer created successfully": "customer created successfully",
-  "customer already exists": "customer already exists"
+  "customer already exists": "customer already exists",
+  "locale updated successfully": "locale updated successfully"
 }

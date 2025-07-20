@@ -22,6 +22,8 @@ import { SearchModule } from './_modules/search/search.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SwaggerDiffController } from './swagger/swagger-diff.controller';
+import { NotificationMiddleware } from 'src/globals/middlewares/notification.middleware';
+import { NotificationService } from 'src/globals/services/notification.service';
 
 const I18N_DIR = path.join(process.cwd(), './i18n');
 
@@ -59,12 +61,13 @@ const I18N_DIR = path.join(process.cwd(), './i18n');
     LanguagesModule,
   ],
   controllers: [AppController, SwaggerDiffController],
-  providers: [AppService],
+  providers: [AppService, NotificationService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LocaleMiddleware).forRoutes('*');
     consumer.apply(XssMiddleware).forRoutes('*');
     consumer.apply(RateLimitMiddleware).forRoutes('*');
+    consumer.apply(NotificationMiddleware).forRoutes('*');
   }
 }

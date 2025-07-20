@@ -12,6 +12,7 @@ export class CustomerCreateService {
     const role = await this.prisma.role.findFirst({
       where: { key: 'Customer' },
     });
+
     const existingCustomer = await this.prisma.user.findUnique({
       where: {
         phone_roleId: {
@@ -19,7 +20,9 @@ export class CustomerCreateService {
           roleId: role?.id,
         },
       },
+      __includeDeleted: true as never,
     });
+    if (existingCustomer.deletedAt !== null) existingCustomer.deletedAt = null;
     if (existingCustomer && existingCustomer.verified)
       throw new ConflictException('customer already exists');
 

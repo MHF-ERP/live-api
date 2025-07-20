@@ -11,6 +11,9 @@ model Session {
 
     User User? @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
+    Language   Language? @relation(fields: [languageId], references: [key], onDelete: SetNull, onUpdate: Cascade)
+    languageId String?   @map("language_id")
+
     @@index([userId], map: "userId")
     @@map("sessions")
 }

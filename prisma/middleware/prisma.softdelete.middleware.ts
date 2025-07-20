@@ -7,6 +7,9 @@ export function softDeleteMiddleware<
     params: Prisma.MiddlewareParams,
     next: (params: Prisma.MiddlewareParams) => Promise<T>,
   ): Promise<T> => {
+    const includeDeleted = params.args?.__includeDeleted;
+    delete params.args.__includeDeleted;
+
     const dates = Prisma.dmmf?.datamodel?.models
       .find((m) => m.name === params.model)
       ?.fields.filter((field) => field.name.endsWith('At'));
@@ -23,7 +26,8 @@ export function softDeleteMiddleware<
         params.action === 'count' ||
         params.action === 'findFirst' ||
         params.action === 'findUnique') &&
-      modelHasDeletedAt
+      modelHasDeletedAt &&
+      !includeDeleted
     ) {
       const omittedDates = {};
       dates?.forEach((date) => {
@@ -42,7 +46,8 @@ export function softDeleteMiddleware<
       };
     } else if (
       (params.action === 'aggregate' || params.action === 'groupBy') &&
-      modelHasDeletedAt
+      modelHasDeletedAt &&
+      !includeDeleted
     ) {
       const omittedDates = {};
       dates?.forEach((date) => {

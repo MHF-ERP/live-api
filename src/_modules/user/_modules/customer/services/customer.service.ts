@@ -15,6 +15,16 @@ export class CustomerService {
     return users;
   }
   async delete(id: Id) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+    await this.prisma.user.update({
+      where: { id },
+      data: {
+        phone: `deleted-${user.phone}-${id}`,
+        email: `deleted-${user.email}-${id}`,
+      },
+    });
     await this.prisma.user.delete({ where: { id } });
   }
 

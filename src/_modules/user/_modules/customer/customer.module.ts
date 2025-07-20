@@ -3,11 +3,12 @@ import { CustomerCreateController } from './controllers/customer.create.controll
 import { CustomerController } from './controllers/customer.controller';
 import { CustomerService } from './services/customer.service';
 import { CustomerCreateService } from './services/customer.create.service';
+import { OTPService } from 'src/_modules/authentication/services/otp.service';
 
 @Module({
   imports: [],
   controllers: [CustomerCreateController, CustomerController],
-  providers: [CustomerService, CustomerCreateService],
+  providers: [CustomerService, CustomerCreateService, OTPService],
   exports: [],
 })
 export class CustomerModule {}

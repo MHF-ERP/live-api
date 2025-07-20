@@ -1,4 +1,4 @@
-export function localizedObject(obj: unknown, locale: string): unknown {
+export function localizedObject(obj: any, locale: string): unknown {
   // Normalize the incoming locale to lowercase for consistent comparison
   const targetLanguage = locale?.toLowerCase();
 

@@ -9,9 +9,11 @@ model Role {
   deletedAt DateTime? @map("deleted_at")
 
   // relations
-  Users              User[]
-  RolePermission     RolePermission[]
-  SystemNotification SystemNotification[]
+  Users                      User[]
+  RolePermission             RolePermission[]
+  SystemSenderNotification   SystemNotification[] @relation("SystemSenderNotification")
+  SystemReceiverNotification SystemNotification[] @relation("SystemReceiverNotification")
+  Notification               Notification[]       @relation("NotificationGroup")
 
   @@map("roles")
 }

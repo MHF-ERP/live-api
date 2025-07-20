@@ -11,6 +11,7 @@ import { CurrentUser } from '../../authentication/decorators/current-user.decora
 import { UpdateUserDTO, UpdateUserPasswordDTO } from '../dto/create.user.dto';
 import { selectFlattenedUserOBJ } from '../prisma-args/user.prisma-select';
 import { UserService } from '../services/user.service';
+import { LocaleHeader } from 'src/_modules/authentication/decorators/locale.decorator';
 
 const prefix = 'profile';
 @Controller('users/me')
@@ -70,6 +71,16 @@ export class MeController {
   ) {
     await this.userService.updatePassword(user.id, dto);
     return this.responses.success(res, 'user updated successfully');
+  }
+
+  @Patch('/locale')
+  async updateLocale(
+    @Res() res: Response,
+    @LocaleHeader() locale: string,
+    @CurrentUser() user: CurrentUser,
+  ) {
+    await this.userService.updateLocale(user.jti, locale);
+    return this.responses.success(res, 'locale updated successfully');
   }
   @Patch('/')
   @UploadFile('image', 'user')

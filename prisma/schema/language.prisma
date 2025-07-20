@@ -8,5 +8,7 @@ model Language {
   createdAt DateTime  @default(now()) @map("created_at")
   deletedAt DateTime? @map("deleted_at")
 
+  sessions Session[]
+
   @@map("languages")
 }

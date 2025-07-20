@@ -164,4 +164,11 @@ export class UserService {
       data,
     });
   }
+
+  async updateLocale(jti: string, locale: string) {
+    await this.prisma.session.update({
+      where: { jti },
+      data: { languageId: locale },
+    });
+  }
 }

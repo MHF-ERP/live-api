@@ -1,5 +1,3 @@
-import { Method } from '@prisma/client';
-
 export const CustomerNotification = [
   {
     id: 1,
@@ -10,7 +8,10 @@ export const CustomerNotification = [
     },
     event: 'customer_post',
     receiverId: 'Customer',
-    methods: [Method.EMAIL, Method.SMS, Method.NOTIFICATION],
+    senderId: 'Customer',
+    email: true,
+    sms: true,
+    notification: true,
     group: false,
   },
   {
@@ -20,9 +21,12 @@ export const CustomerNotification = [
       en: 'New customer has joined Bookspa.',
       ar: 'عميل جديد انضم إلى بوك سبا.',
     },
+    senderId: 'Customer',
+    email: true,
+    sms: true,
+    notification: true,
     event: 'customer_post',
     receiverId: 'Admin',
-    methods: [Method.EMAIL, Method.SMS, Method.NOTIFICATION],
     group: true,
   },
 ];

@@ -1,6 +1,9 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { BatchResponse, MulticastMessage } from 'firebase-admin/messaging';
+import { PrismaService } from './prisma.service';
+import { SystemNotification } from '@prisma/client';
+import { localizedObject } from '../helpers/localized.return';
 
 declare module 'firebase-admin/messaging' {
   interface Messaging {
@@ -8,15 +11,11 @@ declare module 'firebase-admin/messaging' {
   }
 }
 
-export enum Topics {
-  Admin = 'Admin',
-}
-
 @Injectable()
 export class NotificationService {
   private readonly logger = new Logger(NotificationService.name);
 
-  constructor() {
+  constructor(private readonly prisma: PrismaService) {
     this.initializeFirebase();
   }
 
@@ -54,14 +53,15 @@ export class NotificationService {
     }
   }
 
-  async subscribeToTopic(fcmToken: string, topic: Topics) {
+  async subscribeToTopic(fcmToken: string, topic: string) {
     try {
       await admin.messaging().subscribeToTopic(fcmToken, topic);
     } catch (error) {
       throw new Error(`Failed to subscribe to topic ${topic}: ${error}`);
     }
   }
-  async sendToTopic(topic: Topics, title: string, body: string) {
+
+  async sendToTopic(topic: string, title: string, body: string) {
     const message = {
       notification: { title, body },
       topic: topic,
@@ -74,6 +74,40 @@ export class NotificationService {
     } catch (error) {
       this.logger.error(`Error sending topic notification: ${error.message}`);
       throw error;
+    }
+  }
+
+  async sendNotification(
+    locale,
+    data: SystemNotification,
+    jti?: string,
+    userId?: Id,
+  ) {
+    const { receiverId, group } = data;
+
+    const title = localizedObject(data.title, locale.languageId) as string;
+    const body = localizedObject(data.body, locale.languageId) as string;
+    if (group) {
+      await this.sendToTopic(receiverId, title, body);
+      await this.prisma.notification.create({
+        data: {
+          title: data.title,
+          body: data.body,
+          groupId: receiverId,
+        },
+      });
+    } else {
+      const token = (await this.prisma.session.findUnique({ where: { jti } }))
+        .fcmToken;
+      await this.sendPushNotification(token, title, body);
+
+      await this.prisma.notification.create({
+        data: {
+          title: data.title,
+          body: data.body,
+          userId,
+        },
+      });
     }
   }
 }
