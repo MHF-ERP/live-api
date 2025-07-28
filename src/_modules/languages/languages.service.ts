@@ -3,7 +3,6 @@ import * as path from 'path';
 import { firstOrMany } from 'src/globals/helpers/first-or-many';
 import { copyAndRenameFolder } from 'src/globals/helpers/folder.helper';
 import { PrismaService } from 'src/globals/services/prisma.service';
-import { redisClient } from 'src/redis/redis.provider';
 import { MediaService } from '../media/services/media.service';
 import {
   CreateLanguagesDTO,
@@ -79,11 +78,9 @@ export class LanguagesService {
     );
   }
   async getCashedLanguages() {
-    const cashed = await redisClient.get('languages');
+    const cashed =undefined;
     if (!cashed) {
       const data = await this.findAll({});
-      await redisClient.set('languages', JSON.stringify(data));
-      redisClient.expire('languages', 300);
       return data;
     }
     return JSON.parse(cashed);
