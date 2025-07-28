@@ -1,0 +1,28 @@
+model Situation {
+    id          Int       @id @default(autoincrement())
+    date        DateTime  @default(now()) @map("date")
+    title       String    @map("title")
+    description String?   @map("description")
+    createdAt   DateTime  @default(now()) @map("created_at")
+    deletedAt   DateTime? @map("deleted_at")
+
+    // direct relations
+    Day              Day                @relation(fields: [dayId], references: [id], onDelete: Cascade)
+    dayId            Int                @map("day_id")
+    SituationOptions SituationOptions[]
+
+    @@map("situations")
+}
+
+model SituationOptions {
+    id          Int       @id @default(autoincrement())
+    situationId Int       @map("situation_id")
+    title       String    @map("title")
+    createdAt   DateTime  @default(now()) @map("created_at")
+    deletedAt   DateTime? @map("deleted_at")
+
+    // direct relations
+    Situation Situation @relation(fields: [situationId], references: [id], onDelete: Cascade)
+
+    @@map("situation_options")
+}

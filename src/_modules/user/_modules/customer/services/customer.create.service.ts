@@ -8,7 +8,7 @@ export class CustomerCreateService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateCustomerDTO) {
-    const { male, ...rest } = data;
+    const { ...rest } = data;
     const role = await this.prisma.role.findFirst({
       where: { key: 'Customer' },
     });
@@ -37,12 +37,6 @@ export class CustomerCreateService {
             data: {
               ...rest,
               roleId: role.id,
-              Details: {
-                create: {
-                  male,
-                  wallet: 0.0,
-                },
-              },
             },
             select: { email: true, phone: true, id: true, name: true },
           });

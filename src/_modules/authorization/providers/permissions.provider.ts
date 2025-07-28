@@ -30,10 +30,17 @@ export const permissions = [
     methods: ['get', 'patch'],
   },
   {
-    name: { en: 'Customers', ar: 'العملاء' },
-    prefix: 'customers',
+    name: { en: 'Situation', ar: 'المواقف' },
+    prefix: 'situation',
     default: false,
-    methods: ['post', 'get', 'patch', 'delete'],
+    methods: ['post', 'get', 'delete', 'patch'],
+  },
+
+  {
+    name: { en: 'Day', ar: 'اليوم' },
+    prefix: 'day',
+    default: false,
+    methods: ['post', 'get', 'delete', 'patch'],
   },
 ];
 

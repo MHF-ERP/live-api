@@ -142,5 +142,11 @@
   "Customer deleted successfully": "Customer deleted successfully",
   "customer created successfully": "customer created successfully",
   "customer already exists": "customer already exists",
-  "locale updated successfully": "locale updated successfully"
+  "locale updated successfully": "locale updated successfully",
+  "day created successfully": "day created successfully",
+  "day fetched successfully": "day fetched successfully",
+  "delete day successfully": "delete day successfully",
+  "Situation created successfully": "Situation created successfully",
+  "Situation fetched successfully": "Situation fetched successfully",
+  "delete Situation successfully": "delete Situation successfully"
 }

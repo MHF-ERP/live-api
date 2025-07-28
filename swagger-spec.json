@@ -1,74 +1,6 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/debug-sentry": {
-      "get": {
-        "operationId": "AppController_getError",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/roles-show": {
-      "get": {
-        "operationId": "AppController_rolesShow",
-        "summary": "",
-        "deprecated": true,
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/api/swagger-diff": {
       "get": {
         "operationId": "SwaggerDiffController_getSwaggerDiff",
@@ -102,257 +34,10 @@
         }
       }
     },
-    "/api/search": {
-      "get": {
-        "operationId": "SearchController_search",
-        "parameters": [
-          {
-            "name": "models",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/SearchDTOForModel"
-              }
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Search"
-        ]
-      }
-    },
-    "/api/search/allowedModels": {
-      "get": {
-        "operationId": "SearchController_getAllowedModels",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Search"
-        ]
-      }
-    },
-    "/api/notification/notifications": {
-      "get": {
-        "operationId": "NotificationController_findAll",
-        "parameters": [
-          {
-            "required": false,
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "required": false,
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Notification"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          },
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/media": {
-      "get": {
-        "operationId": "MediaController_returnMedia",
-        "parameters": [
-          {
-            "name": "media",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Media"
-        ]
-      }
-    },
-    "/api/authentication/refresh-token": {
-      "post": {
-        "operationId": "BaseAuthenticationController_refreshToken",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "default": {
-                    "value": {
-                      "data": null
-                    }
-                  }
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "tags": [
-          "Authentication"
-        ],
-        "security": [
-          {
-            "REFRESH Token": []
-          }
-        ]
-      }
-    },
-    "/api/authentication/login/{roleId}": {
+    "/api/authentication/login": {
       "post": {
         "operationId": "BaseAuthenticationController_login",
         "parameters": [
-          {
-            "name": "roleId",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          },
           {
             "in": "header",
             "required": false,
@@ -392,213 +77,6 @@
         },
         "tags": [
           "Authentication"
-        ]
-      }
-    },
-    "/api/authentication/forget-password/{roleId}": {
-      "post": {
-        "operationId": "BaseAuthenticationController_forgetPassword",
-        "parameters": [
-          {
-            "name": "roleId",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ForgetPasswordDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Authentication"
-        ]
-      }
-    },
-    "/api/authentication/verify": {
-      "post": {
-        "operationId": "BaseAuthenticationController_verifyUser",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VerifyOtpDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Authentication"
-        ],
-        "security": [
-          {
-            "VERIFY Token": []
-          }
-        ]
-      }
-    },
-    "/api/authentication/verify-reset-password": {
-      "post": {
-        "operationId": "BaseAuthenticationController_verifyOtp",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VerifyOtpDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Authentication"
-        ],
-        "security": [
-          {
-            "VERIFY Token": []
-          }
-        ]
-      }
-    },
-    "/api/authentication/reset-password": {
-      "post": {
-        "operationId": "BaseAuthenticationController_resetPassword",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResetPasswordDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Authentication"
-        ],
-        "security": [
-          {
-            "PASSWORD_RESET Token": []
-          }
         ]
       }
     },
@@ -643,94 +121,9 @@
         ]
       }
     },
-    "/api/roles": {
-      "get": {
-        "operationId": "RoleController_get",
-        "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "all-roles": {
-                    "summary": "All Roles",
-                    "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "default": "string"
-                        }
-                      ]
-                    }
-                  },
-                  "role-with-id": {
-                    "summary": "Role with Id",
-                    "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "default": "string",
-                          "Permissions": [
-                            {
-                              "name": "John Doe",
-                              "method": [
-                                "string"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "tags": [
-          "Roles"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
+    "/api/day": {
       "post": {
-        "operationId": "RoleController_post",
+        "operationId": "DayController_create",
         "parameters": [
           {
             "in": "header",
@@ -759,95 +152,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateRoleDTO"
+                "$ref": "#/components/schemas/CreateDayDTO"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Roles"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/roles/{id}": {
-      "get": {
-        "operationId": "RoleController_get",
-        "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
           "200": {
             "content": {
               "application/json": {
                 "examples": {
-                  "all-roles": {
-                    "summary": "All Roles",
+                  "default": {
                     "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "default": "string"
-                        }
-                      ]
-                    }
-                  },
-                  "role-with-id": {
-                    "summary": "Role with Id",
-                    "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "default": "string",
-                          "Permissions": [
-                            {
-                              "name": "John Doe",
-                              "method": [
-                                "string"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
+                      "data": null
                     }
                   }
                 }
@@ -857,7 +174,7 @@
           }
         },
         "tags": [
-          "Roles"
+          "Day"
         ],
         "security": [
           {
@@ -865,523 +182,9 @@
           }
         ]
       },
-      "patch": {
-        "operationId": "RoleController_update",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateRoleDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Roles"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "delete": {
-        "operationId": "RoleController_delete",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Roles"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/permissions": {
       "get": {
-        "operationId": "PermissionController_getPermissions",
+        "operationId": "DayController_findAll",
         "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "all-permissions": {
-                    "summary": "All Permissions",
-                    "value": {
-                      "data": [
-                        {
-                          "name": "John Doe",
-                          "prefix": "string",
-                          "method": [
-                            "string"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "tags": [
-          "Permissions"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/permissions/{id}": {
-      "patch": {
-        "operationId": "PermissionController_updatePermission",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePermissionDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Permissions"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/users/me/permissions": {
-      "get": {
-        "operationId": "MeController_getPermissions",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "permissions": {
-                    "summary": "Permissions",
-                    "value": {
-                      "data": [
-                        {
-                          "name": "John Doe",
-                          "prefix": "string",
-                          "method": [
-                            "string"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "tags": [
-          "Profile"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/users/me": {
-      "get": {
-        "operationId": "MeController_Profile",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "user-profile": {
-                    "summary": "User Profile",
-                    "value": {
-                      "data": {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "user@example.com",
-                        "phone": "+123456789",
-                        "verified": true,
-                        "active": true,
-                        "image": "https://example.com/avatar.png",
-                        "createdAt": "2025-06-26T18:17:10.000Z",
-                        "deletedAt": "2025-06-26T18:17:10.000Z",
-                        "Role": {
-                          "id": 1,
-                          "key": "string",
-                          "name": "John Doe"
-                        },
-                        "unReadNotifications": 1,
-                        "Permissions": [
-                          {
-                            "name": "John Doe",
-                            "prefix": "string",
-                            "method": [
-                              "string"
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "tags": [
-          "Profile"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "patch": {
-        "operationId": "MeController_updateCurrentUser",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Profile"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/users/me/change-password": {
-      "patch": {
-        "operationId": "MeController_updatePassword",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserPasswordDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Profile"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/users/me/locale": {
-      "patch": {
-        "operationId": "MeController_updateLocale",
-        "parameters": [
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Profile"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      }
-    },
-    "/api/users": {
-      "get": {
-        "operationId": "UserController_getAll",
-        "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "required": false,
             "name": "page",
@@ -1407,33 +210,9 @@
             }
           },
           {
+            "name": "id",
             "required": false,
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "phone",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "roleId",
-            "in": "query",
+            "in": "path",
             "schema": {
               "type": "number"
             }
@@ -1462,72 +241,18 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "get-all-users": {
-                    "summary": "Get All Users",
-                    "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "email": "user@example.com",
-                          "phone": "+123456789",
-                          "verified": true,
-                          "active": true,
-                          "image": "https://example.com/avatar.png",
-                          "createdAt": "2025-06-26T18:17:10.000Z",
-                          "deletedAt": "2025-06-26T18:17:10.000Z"
-                        }
-                      ],
-                      "total": 1
-                    }
-                  },
-                  "get-user-with-id": {
-                    "summary": "Get User with id",
-                    "value": {
-                      "data": {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "user@example.com",
-                        "phone": "+123456789",
-                        "verified": true,
-                        "active": true,
-                        "image": "https://example.com/avatar.png",
-                        "createdAt": "2025-06-26T18:17:10.000Z",
-                        "deletedAt": "2025-06-26T18:17:10.000Z"
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "description": ""
           }
         },
         "tags": [
-          "Users"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
+          "Day"
         ]
       }
     },
-    "/api/users/{id}": {
+    "/api/day/{id}": {
       "get": {
-        "operationId": "UserController_getAll",
+        "operationId": "DayController_findAll",
         "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "required": false,
             "name": "page",
@@ -1553,33 +278,51 @@
             }
           },
           {
+            "name": "id",
             "required": false,
-            "name": "name",
-            "in": "query",
+            "in": "path",
             "schema": {
-              "type": "string"
+              "type": "number"
             }
           },
           {
+            "in": "header",
             "required": false,
-            "name": "email",
-            "in": "query",
+            "name": "Locale",
             "schema": {
-              "type": "string"
+              "example": "en"
             }
           },
           {
+            "in": "header",
             "required": false,
-            "name": "phone",
-            "in": "query",
+            "name": "isLocalized",
             "schema": {
-              "type": "string"
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
             }
-          },
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Day"
+        ]
+      },
+      "delete": {
+        "operationId": "DayController_delete",
+        "parameters": [
           {
-            "required": false,
-            "name": "roleId",
-            "in": "query",
+            "name": "id",
+            "required": true,
+            "in": "path",
             "schema": {
               "type": "number"
             }
@@ -1611,39 +354,9 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "get-all-users": {
-                    "summary": "Get All Users",
+                  "default": {
                     "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "email": "user@example.com",
-                          "phone": "+123456789",
-                          "verified": true,
-                          "active": true,
-                          "image": "https://example.com/avatar.png",
-                          "createdAt": "2025-06-26T18:17:10.000Z",
-                          "deletedAt": "2025-06-26T18:17:10.000Z"
-                        }
-                      ],
-                      "total": 1
-                    }
-                  },
-                  "get-user-with-id": {
-                    "summary": "Get User with id",
-                    "value": {
-                      "data": {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "user@example.com",
-                        "phone": "+123456789",
-                        "verified": true,
-                        "active": true,
-                        "image": "https://example.com/avatar.png",
-                        "createdAt": "2025-06-26T18:17:10.000Z",
-                        "deletedAt": "2025-06-26T18:17:10.000Z"
-                      }
+                      "data": null
                     }
                   }
                 }
@@ -1653,111 +366,7 @@
           }
         },
         "tags": [
-          "Users"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "patch": {
-        "operationId": "UserController_updateUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Users"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "delete": {
-        "operationId": "UserController_deleteUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Users"
+          "Day"
         ],
         "security": [
           {
@@ -1766,9 +375,9 @@
         ]
       }
     },
-    "/api/customers": {
+    "/api/situation": {
       "post": {
-        "operationId": "CustomerCreateController_createUser",
+        "operationId": "SituationController_create",
         "parameters": [
           {
             "in": "header",
@@ -1797,36 +406,39 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCustomerDTO"
+                "$ref": "#/components/schemas/CreateSituationDTO"
               }
             }
           }
         },
         "responses": {
-          "201": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "default": {
+                    "value": {
+                      "data": null
+                    }
+                  }
+                }
+              }
+            },
             "description": ""
           }
         },
         "tags": [
-          "Customers"
+          "Situation"
         ],
         "security": [
           {
-            "Access Token": []
+            "ACCESS Token": []
           }
         ]
       },
       "get": {
-        "operationId": "CustomerController_getAll",
+        "operationId": "SituationController_findAll",
         "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "required": false,
             "name": "page",
@@ -1839,6 +451,30 @@
             "required": false,
             "name": "limit",
             "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "dayId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "path",
             "schema": {
               "type": "number"
             }
@@ -1867,72 +503,18 @@
         ],
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "examples": {
-                  "get-all-customer": {
-                    "summary": "Get All Customer",
-                    "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "email": "user@example.com",
-                          "phone": "+123456789",
-                          "verified": true,
-                          "active": true,
-                          "image": "https://example.com/avatar.png",
-                          "createdAt": "2025-06-26T18:17:10.000Z",
-                          "deletedAt": "2025-06-26T18:17:10.000Z"
-                        }
-                      ],
-                      "total": 1
-                    }
-                  },
-                  "get-customer-with-id": {
-                    "summary": "Get Customer with id",
-                    "value": {
-                      "data": {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "user@example.com",
-                        "phone": "+123456789",
-                        "verified": true,
-                        "active": true,
-                        "image": "https://example.com/avatar.png",
-                        "createdAt": "2025-06-26T18:17:10.000Z",
-                        "deletedAt": "2025-06-26T18:17:10.000Z"
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "description": ""
           }
         },
         "tags": [
-          "Customers"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
+          "Situation"
         ]
       }
     },
-    "/api/customers/{id}": {
+    "/api/situation/{id}": {
       "get": {
-        "operationId": "CustomerController_getAll",
+        "operationId": "SituationController_findAll",
         "parameters": [
-          {
-            "name": "id",
-            "required": false,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "required": false,
             "name": "page",
@@ -1945,6 +527,72 @@
             "required": false,
             "name": "limit",
             "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "dayId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Situation"
+        ]
+      },
+      "delete": {
+        "operationId": "SituationController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
             "schema": {
               "type": "number"
             }
@@ -1976,39 +624,9 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "get-all-customer": {
-                    "summary": "Get All Customer",
+                  "default": {
                     "value": {
-                      "data": [
-                        {
-                          "id": 1,
-                          "name": "John Doe",
-                          "email": "user@example.com",
-                          "phone": "+123456789",
-                          "verified": true,
-                          "active": true,
-                          "image": "https://example.com/avatar.png",
-                          "createdAt": "2025-06-26T18:17:10.000Z",
-                          "deletedAt": "2025-06-26T18:17:10.000Z"
-                        }
-                      ],
-                      "total": 1
-                    }
-                  },
-                  "get-customer-with-id": {
-                    "summary": "Get Customer with id",
-                    "value": {
-                      "data": {
-                        "id": 1,
-                        "name": "John Doe",
-                        "email": "user@example.com",
-                        "phone": "+123456789",
-                        "verified": true,
-                        "active": true,
-                        "image": "https://example.com/avatar.png",
-                        "createdAt": "2025-06-26T18:17:10.000Z",
-                        "deletedAt": "2025-06-26T18:17:10.000Z"
-                      }
+                      "data": null
                     }
                   }
                 }
@@ -2018,111 +636,7 @@
           }
         },
         "tags": [
-          "Customers"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "patch": {
-        "operationId": "CustomerController_updateUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCustomerDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Customers"
-        ],
-        "security": [
-          {
-            "ACCESS Token": []
-          }
-        ]
-      },
-      "delete": {
-        "operationId": "CustomerController_deleteUser",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "Locale",
-            "schema": {
-              "example": "en"
-            }
-          },
-          {
-            "in": "header",
-            "required": false,
-            "name": "isLocalized",
-            "schema": {
-              "example": false,
-              "type": "boolean",
-              "enum": [
-                true,
-                false
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Customers"
+          "Situation"
         ],
         "security": [
           {
@@ -2601,34 +1115,6 @@
       }
     },
     "schemas": {
-      "SearchDTOForModel": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "number"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "model": {
-            "type": "string"
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "type": "array"
-            }
-          },
-          "value": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "model",
-          "fields",
-          "value"
-        ]
-      },
       "EmailPasswordLoginDTO": {
         "type": "object",
         "properties": {
@@ -2651,186 +1137,68 @@
           "password"
         ]
       },
-      "ForgetPasswordDTO": {
+      "CreateDayDTO": {
         "type": "object",
         "properties": {
-          "email": {
+          "date": {
+            "format": "date-time",
             "type": "string",
-            "example": "test@test.com"
-          }
-        },
-        "required": [
-          "email"
-        ]
-      },
-      "VerifyOtpDTO": {
-        "type": "object",
-        "properties": {
-          "otp": {
-            "type": "string",
-            "example": "1234"
-          }
-        },
-        "required": [
-          "otp"
-        ]
-      },
-      "ResetPasswordDTO": {
-        "type": "object",
-        "properties": {
-          "password": {
-            "type": "string",
-            "example": "Default@123",
-            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
-          }
-        },
-        "required": [
-          "password"
-        ]
-      },
-      "UpdateRoleDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "object",
-            "example": "{\"en\": \"John\", \"ar\": \"جون\"}"
+            "example": "2025-07-28T11:49:12.450Z"
           },
-          "key": {
+          "title": {
             "type": "string"
           },
-          "permissionIds": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "title",
+          "description"
+        ]
+      },
+      "Option": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "CreateSituationDTO": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2025-07-28T11:49:12.458Z"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dayId": {
+            "type": "number"
+          },
+          "options": {
             "type": "array",
             "items": {
-              "type": "number"
+              "$ref": "#/components/schemas/Option"
             }
           }
         },
         "required": [
-          "permissionIds"
+          "date",
+          "title",
+          "dayId",
+          "options"
         ]
-      },
-      "CreateRoleDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "object",
-            "example": "{\"en\": \"John\", \"ar\": \"جون\"}"
-          },
-          "key": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "key"
-        ]
-      },
-      "UpdatePermissionDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "object",
-            "example": "{\"en\": \"John\", \"ar\": \"جون\"}"
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "UpdateUserPasswordDTO": {
-        "type": "object",
-        "properties": {
-          "password": {
-            "type": "string",
-            "example": "Default@123",
-            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
-          },
-          "newPassword": {
-            "type": "string",
-            "example": "Default@123",
-            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
-          }
-        },
-        "required": [
-          "password",
-          "newPassword"
-        ]
-      },
-      "UpdateUserDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+966 0509999999"
-          },
-          "fcm": {
-            "type": "string"
-          }
-        }
-      },
-      "CreateCustomerDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+966 0509999999"
-          },
-          "password": {
-            "type": "string",
-            "example": "Default@123",
-            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
-          },
-          "male": {
-            "type": "boolean",
-            "example": false
-          }
-        },
-        "required": [
-          "name",
-          "email",
-          "phone",
-          "password",
-          "male"
-        ]
-      },
-      "UpdateCustomerDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "example": "test@test.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+966 0509999999"
-          },
-          "password": {
-            "type": "string",
-            "example": "Default@123",
-            "description": "Password must be: 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
-          },
-          "male": {
-            "type": "boolean",
-            "example": false
-          }
-        }
       },
       "CreateLanguagesDTO": {
         "type": "object",

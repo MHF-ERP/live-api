@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-git pull
+# git pull
 
 node translate.ts
 CHANGES=$(git diff --name-only)
