@@ -29,6 +29,33 @@ export class SituationService {
     });
   }
 
+  async findCurrent() {
+    const { startOfDay, endOfDay } = this.getDates();
+    const current = new Date();
+    const data = await this.prisma.situation.findMany({
+      where: {
+        date: {
+          gte: current,
+        },
+        Day: {
+          AND: [
+            {
+              date: {
+                gte: startOfDay,
+              },
+            },
+            {
+              date: {
+                lte: endOfDay,
+              },
+            },
+          ],
+        },
+      },
+    });
+    return data;
+  }
+
   async findAll(filters: FilterSituationDTO) {
     const args = getSituationArgs(filters);
     const argsWithSelect = getSituationArgsWithSelect();
@@ -52,5 +79,15 @@ export class SituationService {
         id,
       },
     });
+  }
+
+  getDates() {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+
+    return { startOfDay, endOfDay };
   }
 }

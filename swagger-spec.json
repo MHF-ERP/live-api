@@ -511,6 +511,42 @@
         ]
       }
     },
+    "/api/situation/current": {
+      "get": {
+        "operationId": "SituationController_findCurrent",
+        "parameters": [
+          {
+            "in": "header",
+            "required": false,
+            "name": "Locale",
+            "schema": {
+              "example": "en"
+            }
+          },
+          {
+            "in": "header",
+            "required": false,
+            "name": "isLocalized",
+            "schema": {
+              "example": false,
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Situation"
+        ]
+      }
+    },
     "/api/situation/{id}": {
       "get": {
         "operationId": "SituationController_findAll",
@@ -1143,7 +1179,7 @@
           "date": {
             "format": "date-time",
             "type": "string",
-            "example": "2025-07-28T12:53:16.864Z"
+            "example": "2025-07-28T18:12:22.941Z"
           },
           "title": {
             "type": "string"
@@ -1175,7 +1211,7 @@
           "date": {
             "format": "date-time",
             "type": "string",
-            "example": "2025-07-28T12:53:17.129Z"
+            "example": "2025-07-28T18:12:22.946Z"
           },
           "title": {
             "type": "string"

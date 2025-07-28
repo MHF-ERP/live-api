@@ -39,6 +39,12 @@ export class SituationController {
     return this.response.created(res, 'Situation created successfully');
   }
 
+  @Get(['/current'])
+  async findCurrent(@Res() res: Response) {
+    const data = await this.service.findCurrent();
+    return this.response.success(res, 'Situation fetched successfully', data);
+  }
+
   @Get(['/', '/:id'])
   @ApiParam({
     type: 'number',
