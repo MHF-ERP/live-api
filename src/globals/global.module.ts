@@ -1,7 +1,6 @@
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Global, Module } from '@nestjs/common';
-import * as admin from 'firebase-admin';
 import { join } from 'path';
 import { LanguagesService } from 'src/_modules/languages/languages.service';
 import { MediaService } from 'src/_modules/media/services/media.service';
@@ -17,20 +16,19 @@ import { SMSService } from './services/sms.service';
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: env('MAIL_HOST'),
-        port: env('MAIL_PORT'),
+        host: process.env.MAIL_HOST,
+        port: parseInt(process.env.MAIL_PORT, 10),
         secure: false,
         auth: {
-          user: env('MAIL_USER'),
-          pass: env('MAIL_PASSWORD'),
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASSWORD,
         },
       },
       defaults: {
-        from: `"No Reply" <${env('SENDER_EMAIL')}>`,
+        from: `"No Reply" <${process.env.SENDER_EMAIL}>`,
       },
-      //
       template: {
-        dir: join(__dirname, '../../src/templates'), // Adjust this path
+        dir: join(__dirname, '../../src/templates'),
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,
@@ -60,16 +58,5 @@ import { SMSService } from './services/sms.service';
     MediaService,
   ],
 })
-export class GlobalModule {
-  constructor() {
-    if (env('NOTIFICATIONS')) {
-      admin.initializeApp({
-        credential: admin.credential.cert({
-          projectId: env('FIREBASE_PROJECT_ID'),
-          clientEmail: env('FIREBASE_CLIENT_EMAIL'),
-          privateKey: env('FIREBASE_PRIVATE_KEY')?.replace(/\\n/g, '\n'),
-        }),
-      });
-    }
-  }
-}
+export class GlobalModule {}
+

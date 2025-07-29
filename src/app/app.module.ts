@@ -21,6 +21,8 @@ import { NotificationMiddleware } from 'src/globals/middlewares/notification.mid
 import { NotificationService } from 'src/globals/services/notification.service';
 import { DayModule } from 'src/_modules/day/day.module';
 import { SituationModule } from 'src/_modules/situation/situation.module';
+import { NotificationsModule } from 'src/notifications/notifications.module';
+import { PushTokensModule } from 'src/push-tokens/push-tokens.module';
 
 const I18N_DIR = path.join(process.cwd(), './i18n');
 
@@ -50,7 +52,8 @@ const I18N_DIR = path.join(process.cwd(), './i18n');
 
     GlobalModule,
     // SearchModule,
-    // NotificationModule,
+    NotificationsModule,
+    PushTokensModule,
     // MediaModule,
     AuthenticationModule,
     DayModule,
@@ -70,3 +73,5 @@ export class AppModule {
     consumer.apply(NotificationMiddleware).forRoutes('*');
   }
 }
+
+
