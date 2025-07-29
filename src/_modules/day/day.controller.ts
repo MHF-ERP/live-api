@@ -36,6 +36,13 @@ export class DayController {
     return this.response.created(res, 'day created successfully');
   }
 
+  @Get(['/current'])
+  async findCurrent(@Res() res: Response) {
+    const data = await this.service.findCurrent();
+    console.log(data);
+    return this.response.success(res, 'Day fetched successfully', data);
+  }
+
   @Get(['/', '/:id'])
   @ApiParam({
     type: 'number',

@@ -148,5 +148,6 @@
   "delete day successfully": "delete day successfully",
   "Situation created successfully": "Situation created successfully",
   "Situation fetched successfully": "Situation fetched successfully",
-  "delete Situation successfully": "delete Situation successfully"
+  "delete Situation successfully": "delete Situation successfully",
+  "Day fetched successfully": "Day fetched successfully"
 }

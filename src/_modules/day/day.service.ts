@@ -16,7 +16,34 @@ export class DayService {
       data,
     });
   }
+  async findCurrent() {
+    const { startOfDay, endOfDay } = this.getDates();
+    const data = await this.prisma.day.findFirst({
+      where: {
+        AND: [
+          {
+            date: {
+              gte: startOfDay,
+            },
+          },
+          {
+            date: {
+              lte: endOfDay,
+            },
+          },
+        ],
+      },
+    });
+    return data;
+  }
+  getDates() {
+    const startOfDay = new Date();
 
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+
+    return { startOfDay, endOfDay };
+  }
   async findAll(filters: FilterDayDTO) {
     const args = getDayArgs(filters);
     const argsWithSelect = getDayArgsWithSelect();

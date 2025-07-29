@@ -32,6 +32,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
           this.responseService.internalServerError(response, messageKey);
           break;
         case 400: {
+          console.log(messageKey);
           this.responseService.badRequest(response, messageKey);
           break;
         }
