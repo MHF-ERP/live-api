@@ -18,18 +18,38 @@ export class DayService {
   }
   async findCurrent() {
     const { startOfDay, endOfDay } = this.getDates();
+    const start = new Date(startOfDay);
+    start.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
     const data = await this.prisma.day.findFirst({
       where: {
-        AND: [
+        OR: [
           {
-            date: {
-              gte: startOfDay,
-            },
+            AND: [
+              {
+                date: {
+                  gte: startOfDay,
+                },
+              },
+              {
+                date: {
+                  lte: endOfDay,
+                },
+              },
+            ],
           },
           {
-            date: {
-              lte: endOfDay,
-            },
+            AND: [
+              {
+                date: {
+                  gte: start,
+                },
+              },
+              {
+                date: {
+                  lte: startOfDay,
+                },
+              },
+            ],
           },
         ],
       },

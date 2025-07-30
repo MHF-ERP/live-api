@@ -4,6 +4,6 @@ import { PushTokensController } from './push-tokens.controller';
 
 @Module({
   providers: [PushTokensService],
-  controllers: [PushTokensController]
+  controllers: [PushTokensController],
 })
 export class PushTokensModule {}

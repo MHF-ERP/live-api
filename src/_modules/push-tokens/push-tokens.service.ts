@@ -33,11 +33,10 @@ export class PushTokensService {
       const pushTokens = await this.prisma.pushToken.findMany({
         select: { token: true },
       });
-      return pushTokens.map(pt => pt.token);
+      return pushTokens.map((pt) => pt.token);
     } catch (error) {
       console.error('Error getting all tokens:', error);
       throw error;
     }
   }
 }
-

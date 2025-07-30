@@ -1,51 +1,38 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import * as admin from 'firebase-admin';
+// notification.service.ts
+import { Injectable } from '@nestjs/common';
+import { Expo } from 'expo-server-sdk';
 
 @Injectable()
-export class FirebaseService implements OnModuleInit {
-  onModuleInit() {
-    admin.initializeApp({
-      credential: admin.credential.cert(require('../../firebase-service-account.json')),
-    });
-  }
+export class NotificationService {
+  private expo = new Expo();
 
-  async sendNotification(token: string, title: string, body: string) {
-    const message = {
-      notification: {
-        title,
-        body,
-      },
-      token,
-    };
-
-    try {
-      const response = await admin.messaging().send(message);
-      console.log('Successfully sent message:', response);
-      return response;
-    } catch (error) {
-      console.error('Error sending message:', error);
-      throw error;
+  async sendPushNotification(token: string, message: string) {
+    if (!Expo.isExpoPushToken(token)) {
+      console.error(`Push token ${token} is not a valid Expo push token`);
+      return;
     }
-  }
 
-  async sendNotificationToMultiple(tokens: string[], title: string, body: string) {
-    const message = {
-      notification: {
-        title,
-        body,
+    const messages = [
+      {
+        to: token,
+        sound: 'default',
+        body: message,
+        data: { someData: 'goes here' },
       },
-      tokens,
-    };
+    ];
 
-    try {
-      const response = await admin.messaging().sendEachForMulticast(message);
-      console.log('Successfully sent messages to multiple devices:', response);
-      return response;
-    } catch (error) {
-      console.error('Error sending messages to multiple devices:', error);
-      throw error;
+    const chunks = this.expo.chunkPushNotifications(messages);
+    const tickets = [];
+
+    for (const chunk of chunks) {
+      try {
+        const ticketChunk = await this.expo.sendPushNotificationsAsync(chunk);
+        tickets.push(...ticketChunk);
+      } catch (error) {
+        console.error(error);
+      }
     }
+
+    return tickets;
   }
 }
-
-

@@ -31,35 +31,40 @@ export class SituationService {
 
   async findCurrent() {
     const { startOfDay, endOfDay } = this.getDates();
+    const start = new Date(startOfDay);
+    start.setHours(0, 0, 0, 0);
     const data = await this.prisma.situation.findMany({
       where: {
-        AND: [
+        OR: [
           {
-            date: {
-              gte: startOfDay,
-            },
+            AND: [
+              {
+                date: {
+                  gte: startOfDay,
+                },
+              },
+              {
+                date: {
+                  lte: endOfDay,
+                },
+              },
+            ],
           },
           {
-            date: {
-              gte: startOfDay,
-            },
+            AND: [
+              {
+                date: {
+                  gte: start,
+                },
+              },
+              {
+                date: {
+                  lt: startOfDay,
+                },
+              },
+            ],
           },
         ],
-
-        Day: {
-          AND: [
-            {
-              date: {
-                gte: startOfDay,
-              },
-            },
-            {
-              date: {
-                lte: endOfDay,
-              },
-            },
-          ],
-        },
       },
     });
     return data;
