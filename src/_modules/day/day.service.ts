@@ -6,6 +6,7 @@ import {
   getDayArgs,
   getDayArgsWithSelect,
 } from './prisma-args/day.prisma-args';
+import { Status } from '@prisma/client';
 
 @Injectable()
 export class DayService {
@@ -22,32 +23,46 @@ export class DayService {
     start.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
     const data = await this.prisma.day.findFirst({
       where: {
-        OR: [
+        AND: [
           {
-            AND: [
+            OR: [
               {
-                date: {
-                  gte: startOfDay,
-                },
+                status: Status.ACTIVE,
               },
               {
-                date: {
-                  lte: endOfDay,
-                },
+                status: Status.FINISH,
               },
             ],
           },
           {
-            AND: [
+            OR: [
               {
-                date: {
-                  gte: start,
-                },
+                AND: [
+                  {
+                    date: {
+                      gte: startOfDay,
+                    },
+                  },
+                  {
+                    date: {
+                      lte: endOfDay,
+                    },
+                  },
+                ],
               },
               {
-                date: {
-                  lte: startOfDay,
-                },
+                AND: [
+                  {
+                    date: {
+                      gte: start,
+                    },
+                  },
+                  {
+                    date: {
+                      lte: startOfDay,
+                    },
+                  },
+                ],
               },
             ],
           },

@@ -12,6 +12,10 @@ export class CreateDayDTO {
   date: Date;
 
   @Required()
+  @ValidateDate()
+  expiredDate: Date;
+
+  @Required()
   @ValidateString()
   title: string;
 

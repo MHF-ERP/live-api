@@ -1,7 +1,9 @@
 model Day {
     id          Int       @id @default(autoincrement())
     date        DateTime  @default(now()) @map("date")
+    expiredDate DateTime? @map("expired_date")
     title       String    @map("title")
+    status      Status    @default(PENDING)
     description String    @map("description") @db.Text
     createdAt   DateTime  @default(now()) @map("created_at")
     deletedAt   DateTime? @map("deleted_at")
@@ -10,4 +12,10 @@ model Day {
     Situation Situation[]
 
     @@map("days")
+}
+
+enum Status {
+    PENDING
+    ACTIVE
+    FINISH
 }

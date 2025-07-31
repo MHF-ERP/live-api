@@ -1395,7 +1395,12 @@
           "date": {
             "format": "date-time",
             "type": "string",
-            "example": "2025-07-30T18:42:10.798Z"
+            "example": "2025-07-31T22:09:12.899Z"
+          },
+          "expiredDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2025-07-31T22:09:12.900Z"
           },
           "title": {
             "type": "string"
@@ -1406,6 +1411,7 @@
         },
         "required": [
           "date",
+          "expiredDate",
           "title",
           "description"
         ]
@@ -1427,7 +1433,7 @@
           "date": {
             "format": "date-time",
             "type": "string",
-            "example": "2025-07-30T18:42:10.831Z"
+            "example": "2025-07-31T22:09:12.909Z"
           },
           "title": {
             "type": "string"
